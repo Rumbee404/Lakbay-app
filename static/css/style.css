@@ -1,0 +1,30 @@
+body {
+    background-color: #f8f9fa;
+}
+
+.navbar-brand {
+    letter-spacing: 0.5px;
+}
+
+.card {
+    border: none;
+}
+
+footer {
+    background-color: #ffffff;
+}
+
+.example-chip {
+    display: inline-block;
+    margin: 0.15rem;
+    padding: 0.35em 0.65em;
+}
+
+.example-chip:hover {
+    background-color: #e9ecef;
+}
+
+mark {
+    padding: 0 2px;
+    border-radius: 2px;
+}
