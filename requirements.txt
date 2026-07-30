@@ -1,0 +1,14 @@
+# Core web framework
+Flask
+
+# Used directly in app.py for safely escaping/highlighting search snippets
+# (also installed automatically as a Flask/Jinja2 dependency, but listed
+# here explicitly since our own code imports it directly)
+MarkupSafe
+
+# Web crawling
+requests
+beautifulsoup4
+
+# TF-IDF indexing and cosine similarity ranking
+scikit-learn

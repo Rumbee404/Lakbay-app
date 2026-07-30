@@ -1,0 +1,19 @@
+# Virtual environment
+venv/
+
+# Python bytecode cache
+__pycache__/
+*.pyc
+
+# Flask dev-server logs (created only when redirecting output manually)
+flask_stdout.log
+flask_stderr.log
+
+# Search analytics database -- generated automatically at first run
+# (see database.py: initialize_database()). Not shipped so every
+# student/grader starts from a clean, real analytics history instead
+# of inheriting someone else's test searches.
+data/analytics.db
+
+# Claude Code local tool settings (not part of the application)
+.claude/
