@@ -1,0 +1,122 @@
+{% extends "base.html" %}
+{% block title %}Analytics - LakbaySearch{% endblock %}
+{% block content %}
+<h2 class="mb-4">Search Analytics</h2>
+
+<div class="row mb-4">
+    <div class="col-md-4">
+        <div class="card text-center shadow-sm">
+            <div class="card-body">
+                <h6 class="card-subtitle text-muted mb-2">Total Searches</h6>
+                <p class="card-text fs-3 fw-bold">{{ stats.total_searches }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card text-center shadow-sm">
+            <div class="card-body">
+                <h6 class="card-subtitle text-muted mb-2">Zero-Result Searches</h6>
+                <p class="card-text fs-3 fw-bold">{{ stats.zero_result_searches }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card text-center shadow-sm">
+            <div class="card-body">
+                <h6 class="card-subtitle text-muted mb-2">Average Search Time</h6>
+                <p class="card-text fs-3 fw-bold">
+                    {% if stats.average_search_time_ms is not none %}
+                        {{ stats.average_search_time_ms }} ms
+                    {% else %}
+                        No data yet
+                    {% endif %}
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mb-4">
+    <div class="col-md-6 mb-4 mb-md-0">
+        <h5 class="mb-3">Most Searched Queries</h5>
+        {% if most_searched_queries %}
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Query</th>
+                    <th>Search Count</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in most_searched_queries %}
+                <tr>
+                    <td>{{ row.query }}</td>
+                    <td>{{ row.search_count }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <p class="text-muted">No searches recorded yet.</p>
+        {% endif %}
+    </div>
+
+    <div class="col-md-6">
+        <h5 class="mb-3">Most Frequent Top Result</h5>
+        {% if most_frequent_top_results %}
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Top Result</th>
+                    <th>Times Returned as #1</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in most_frequent_top_results %}
+                <tr>
+                    <td>{{ row.top_result }}</td>
+                    <td>{{ row.times_top }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <p class="text-muted">No searches with results recorded yet.</p>
+        {% endif %}
+    </div>
+</div>
+
+<h5 class="mb-3">Recent Searches</h5>
+{% if recent_searches %}
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Query</th>
+                <th>Date/Time</th>
+                <th>Results</th>
+                <th>Top Result</th>
+                <th>Execution Time</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for entry in recent_searches %}
+            <tr>
+                <td>{{ entry.query }}</td>
+                <td>{{ entry.searched_at }}</td>
+                <td>{{ entry.result_count }}</td>
+                <td>{{ entry.top_result or "-" }}</td>
+                <td>{{ entry.execution_time_ms }} ms</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% else %}
+<p class="text-muted">No searches recorded yet. Try running a few searches first.</p>
+{% endif %}
+
+<p class="text-muted mt-3">
+    <small>Analytics are recorded automatically from real searches performed on this site.</small>
+</p>
+{% endblock %}

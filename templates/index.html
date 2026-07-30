@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %}LakbaySearch - Home{% endblock %}
+{% block content %}
+<div class="text-center py-5">
+    <h1 class="display-5 fw-bold">LakbaySearch</h1>
+    <p class="lead text-muted">
+        A search engine for Philippine tourism &mdash; find beaches, mountains, historical
+        sites, cities, and cultural attractions across the Philippines.
+    </p>
+
+    {% if request.args.get('error') == 'empty_query' %}
+    <div class="alert alert-warning col-md-6 mx-auto">Please enter a search term.</div>
+    {% endif %}
+
+    <form class="row justify-content-center mt-4" action="{{ url_for('search') }}" method="get">
+        <div class="col-md-6">
+            <div class="input-group input-group-lg">
+                <input
+                    type="text"
+                    class="form-control"
+                    name="q"
+                    placeholder="Search e.g. Boracay, Banaue, Bohol..."
+                    required
+                >
+                <button class="btn btn-primary" type="submit">Search</button>
+            </div>
+        </div>
+    </form>
+
+    <div class="mt-3">
+        <span class="text-muted small">Try:</span>
+        {% for example in ["Boracay", "Chocolate Hills", "Vigan", "Mount Apo", "Sinulog"] %}
+        <a href="{{ url_for('search', q=example) }}" class="badge bg-light text-dark border example-chip text-decoration-none">{{ example }}</a>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
